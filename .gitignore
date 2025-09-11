@@ -1,0 +1,21 @@
+craftconnect-frontend/node_modules/
+craftconnect-backend/node_modules/
+craftconnect-frontend/build/
+craftconnect-frontend/.cache/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+craftconnect-backend/.env
+craftconnect-backend/config/service-account-key.json
+
+# Uploaded files (kept locally only)
+craftconnect-backend/uploads/products/
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+.cursor/
+.idea/
