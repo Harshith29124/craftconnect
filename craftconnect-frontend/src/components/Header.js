@@ -7,9 +7,38 @@ const Header = ({ variant = 'craftconnect' }) => {
   const getBrandInfo = () => {
     switch (variant) {
       case 'karigar':
-        return { name: 'KarigarConnect', icon: 'ℹ️' };
+        return { 
+          name: 'KarigarConnect', 
+          icon: 'ℹ️',
+          navItems: [
+            { name: 'Home', path: '/' },
+            { name: 'Stories', path: '#' },
+            { name: 'Insights', path: '/insights' },
+            { name: 'Tools', path: '/toolkit' }
+          ]
+        };
+      case 'kala':
+        return { 
+          name: 'KalaConnect', 
+          icon: '🎨',
+          navItems: [
+            { name: 'Home', path: '/' },
+            { name: 'Marketplace', path: '/marketplace' },
+            { name: 'Resources', path: '#' },
+            { name: 'Community', path: '#' }
+          ]
+        };
       default:
-        return { name: 'CraftConnect', icon: '🎨' };
+        return { 
+          name: 'CraftConnect', 
+          icon: '🎨',
+          navItems: [
+            { name: 'Home', path: '/' },
+            { name: 'Marketplace', path: '/marketplace' },
+            { name: 'Resources', path: '#' },
+            { name: 'Community', path: '#' }
+          ]
+        };
     }
   };
 
@@ -17,34 +46,25 @@ const Header = ({ variant = 'craftconnect' }) => {
 
   return (
     <header className="flex items-center justify-between px-4 sm:px-10 py-4 border-b border-border-color bg-white/80 backdrop-blur-sm">
-      <div className="flex items-center gap-4">
+      <Link to="/" className="flex items-center gap-4">
         <div className="w-8 h-8 text-primary text-2xl">{brand.icon}</div>
         <h1 className="text-xl font-bold text-text-primary">{brand.name}</h1>
-      </div>
+      </Link>
 
       <nav className="hidden md:flex items-center gap-8">
-        <Link
-          to="/"
-          className={`text-sm font-medium transition-colors ${
-            location.pathname === '/' ? 'text-primary' : 'text-text-secondary hover:text-primary'
-          }`}
-        >
-          Home
-        </Link>
-        <Link
-          to="/upload"
-          className={`text-sm font-medium transition-colors ${
-            location.pathname === '/upload' ? 'text-primary' : 'text-text-secondary hover:text-primary'
-          }`}
-        >
-          Marketplace
-        </Link>
-        <a href="#" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">
-          Resources
-        </a>
-        <a href="#" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">
-          Community
-        </a>
+        {brand.navItems.map((item) => (
+          <Link 
+            key={item.name}
+            to={item.path}
+            className={`text-sm font-medium transition-colors ${
+              location.pathname === item.path 
+                ? 'text-primary' 
+                : 'text-text-secondary hover:text-primary'
+            }`}
+          >
+            {item.name}
+          </Link>
+        ))}
       </nav>
 
       <div className="flex items-center gap-4">
@@ -58,6 +78,3 @@ const Header = ({ variant = 'craftconnect' }) => {
 };
 
 export default Header;
-
-
-

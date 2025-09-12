@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const ProductUpload = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [productData, setProductData] = useState({ name: '', price: '', description: '' });
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const categories = ['Jewelry', 'Textiles', 'Pottery', 'Woodcraft', 'Other'];
 
@@ -16,11 +19,13 @@ const ProductUpload = () => {
 
   const handleUpload = async () => {
     if (!selectedFile || !selectedCategory) {
-      alert('Please select a file and category');
+      setError('Please select a file and category');
       return;
     }
 
     setIsUploading(true);
+    setError('');
+    setSuccess('');
 
     try {
       const formData = new FormData();
@@ -30,19 +35,24 @@ const ProductUpload = () => {
       formData.append('description', productData.description);
       formData.append('category', selectedCategory.toLowerCase());
 
-      const response = await axios.post('/api/products/upload', formData, {
+      const response = await axios.post(API_ENDPOINTS.UPLOAD, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
       if (response.data.success) {
-        alert('Product uploaded successfully!');
+        setSuccess('Product uploaded successfully!');
         setProductData({ name: '', price: '', description: '' });
         setSelectedCategory('');
         setSelectedFile(null);
+        // Reset file input
+        const fileInput = document.getElementById('file-upload');
+        if (fileInput) fileInput.value = '';
+      } else {
+        setError('Upload failed. Please try again.');
       }
     } catch (error) {
       console.error('Upload error:', error);
-      alert('Upload failed. Please try again.');
+      setError(error.response?.data?.message || 'Upload failed. Please try again.');
     } finally {
       setIsUploading(false);
     }
@@ -54,6 +64,30 @@ const ProductUpload = () => {
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-text-primary">Product Upload</h2>
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-600">{error}</p>
+            <button 
+              onClick={() => setError('')} 
+              className="mt-2 text-sm text-red-500 hover:text-red-700 underline"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-green-600">{success}</p>
+            <button 
+              onClick={() => setSuccess('')} 
+              className="mt-2 text-sm text-green-500 hover:text-green-700 underline"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
 
         <div className="bg-white rounded-lg p-8 mb-8 border-2 border-dashed border-border-color">
           <div className="text-center">
