@@ -1,5 +1,5 @@
-// Load environment variables early
-require('dotenv').config();
+// Load environment variables early from centralized loader
+require('./src/config/env');
 
 const app = require('./src/app');
 const connectDB = require('./src/config/database');

@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+// Initialize environment variables early
+require('./config/env');
 
 // Route imports
 const aiAnalysisRoutes = require('./routes/ai-analysis');
