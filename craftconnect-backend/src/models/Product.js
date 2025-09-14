@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ['jewelry', 'textiles', 'pottery', 'woodcraft', 'other']
+      enum: ['jewelry', 'textiles', 'pottery', 'woodcraft', 'metalwork', 'embroidery', 'painting', 'other']
     },
     imagePath: { type: String, required: true },
     imageAnalysis: {
@@ -26,7 +26,33 @@ const productSchema = new mongoose.Schema(
         }
       ]
     },
-    isActive: { type: Boolean, default: true }
+    businessType: { type: String },
+    region: { type: String },
+    pricingSuggestions: {
+      localMarket: {
+        min: Number,
+        max: Number,
+        reasoning: String
+      },
+      premiumMarket: {
+        min: Number,
+        max: Number,
+        reasoning: String
+      },
+      exportMarket: {
+        min: Number,
+        max: Number,
+        reasoning: String
+      },
+      recommendedPrice: Number,
+      pricingStrategy: String,
+      valueProposition: String
+    },
+    artisanId: { type: String, default: 'demo-artisan' },
+    isActive: { type: Boolean, default: true },
+    views: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
+    sales: { type: Number, default: 0 }
   },
   { timestamps: true }
 );
