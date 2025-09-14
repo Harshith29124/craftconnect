@@ -6,6 +6,7 @@ require('./config/env');
 // Route imports
 const aiAnalysisRoutes = require('./routes/ai-analysis');
 const productRoutes = require('./routes/products');
+const storytellingRoutes = require('./routes/storytelling');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/uploads', express.static('uploads'));
 // API Routes
 app.use('/api/ai-analysis', aiAnalysisRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/storytelling', storytellingRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

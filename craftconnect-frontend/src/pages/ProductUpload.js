@@ -63,7 +63,10 @@ const ProductUpload = () => {
       <Header />
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-text-primary">Product Upload</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4 text-text-primary">Smart Product Upload</h2>
+          <p className="text-lg text-text-secondary">Upload your craft photos and let Google Cloud Vision AI automatically categorize and suggest pricing</p>
+        </div>
 
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">

@@ -29,8 +29,18 @@ const BusinessInsights = () => {
 
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-text-primary mb-4">AI-Identified Business Problems</h1>
-          <p className="text-lg text-text-secondary">Based on your voice input, we've identified potential challenges and opportunities.</p>
+          <h1 className="text-4xl font-bold text-text-primary mb-4">AI-Powered Business Analysis</h1>
+          <p className="text-lg text-text-secondary">Powered by Google Cloud Speech-to-Text & Vertex AI, we've analyzed your craft business and identified personalized opportunities.</p>
+          <div className="mt-4 flex justify-center gap-4 text-sm text-text-secondary">
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              Voice Analysis Complete
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              AI Insights Generated
+            </span>
+          </div>
         </div>
 
         <div className="bg-white rounded-lg p-6 mb-8 shadow-sm">
